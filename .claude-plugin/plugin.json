@@ -1,0 +1,12 @@
+{
+  "name": "bizarro",
+  "version": "1.0.0",
+  "description": "Creative development the way Luis Bizarro builds it: Lisergia, Preact, React, WebGL, WebGPU, motion and CSS.",
+  "author": {
+    "name": "Luis Bizarro",
+    "url": "https://bizar.ro"
+  },
+  "homepage": "https://github.com/bizarro/skills",
+  "repository": "https://github.com/bizarro/skills",
+  "license": "MIT"
+}

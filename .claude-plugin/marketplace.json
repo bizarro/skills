@@ -1,0 +1,17 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "bizarro",
+  "description": "Luis Bizarro's opinions on creative development, packaged as agent skills.",
+  "owner": {
+    "name": "Luis Bizarro",
+    "url": "https://bizar.ro"
+  },
+  "plugins": [
+    {
+      "name": "bizarro",
+      "description": "Creative development the way Luis Bizarro builds it: Lisergia, Preact, React, WebGL, WebGPU, motion and CSS.",
+      "source": "./",
+      "category": "development"
+    }
+  ]
+}
