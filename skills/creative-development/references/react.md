@@ -1,6 +1,6 @@
-# React, Preact and state
+# React, Preact and State
 
-## The client decides, not the framework
+## The Client Decides, Not the Framework
 
 Choose the rendering stack by **who the client is and what they want**, not by what looks best on a résumé.
 
@@ -11,7 +11,30 @@ Choose the rendering stack by **who the client is and what they want**, not by w
 
 Don't push the user toward a different stack than the one the client situation calls for. If the user is on the client's React stack, work inside it.
 
-## React plus WebGL: use MobX
+## Inside a Client's Next.js
+
+When the client's stack is Next.js, keep the craft and fight the framework as little as possible:
+
+- Server components by default. Put `"use client"` on the smallest child that needs it.
+- Plain `<img>` and `<video>`, not `next/image`, so the media stays under the animation code's control.
+- WebGL lives in plain classes (`renderer.ts`) that a small client component imports dynamically. WebGPU code never loads on the server or in the main bundle, and the static image underneath stays as the fallback.
+- Write the page transition yourself instead of adding a transition router: a fade out, `router.push`, and a fade in when `usePathname` changes. Keeping it in one file also lets it stop and restart Lenis.
+- Render a safe default on the server and upgrade after mount (see `performance.md`).
+- Next.js 16 changed enough that agents should read the guide in `node_modules/next/dist/docs/` before writing framework code. Say so in the project's `AGENTS.md`.
+
+## Applications
+
+Editors, tools and anything with heavy UI state are React apps, built like this:
+
+- **MobX for all app state**, not only what the scene shares. Stores are classes with an exported singleton (`export const tabsStore = new TabsStore()`). A component takes its store as a prop with the singleton as default (`ToastStack({ store = notificationsStore })`), which keeps it testable.
+- **Components** are named exports wrapped in `observer`: `export const Panel = observer(function Panel(...) { … })`. No default exports.
+- **Hooks** are `use-kebab-case.ts` files (shortcuts, gestures). Pure logic sits in `lib/`, tests in `tests/`.
+- **The engine is a separate package** (`packages/core`), plain classes with no React, that the UI drives. One explicit file per type rather than generic tables. Every `autorun` and `reaction` it creates is disposed in its `dispose()`.
+- **UI in px**: type at 12, 11 and 10px, Lucide icons at `size={14} strokeWidth={1.75}`, 36px panel headers, 100–150ms transitions, panels that fold to their header.
+- **Theme** from two base colors plus a `color-mix(in oklab, var(--color-foreground) N%, transparent)` ramp for every tint, switched with `data-theme` and following `prefers-color-scheme`.
+- **Desktop apps** use electron-vite and electron-builder. The desktop app depends on the web app package and runs the same bundle. A typed `window.desktop` bridge is declared in `src/shared/desktop-api.ts`, IPC handlers are split by domain in `main/ipc/`, and the web build checks for the bridge (`window.desktop?.…`) so it runs without it. Releases build from a GitHub workflow on `v<version>` tags.
+
+## React plus WebGL: Use MobX
 
 When a project has **both** React UI and a WebGL/WebGPU scene, use **MobX** for the shared state. This is close to a requirement.
 
@@ -53,3 +76,5 @@ reaction(
 ## React Three Fiber
 
 R3F is the last resort. See `webgl.md`. It is justified only in a React application where a lot of UI state drives the scene interactively. Even then, keep heavy per-frame work out of React state: mutate refs in `useFrame` and keep shared app state in MobX.
+
+Luis has tried it for a marketing-site scene and for a quick webcam experiment, and went back to plain Three.js classes for the sites that followed. A throwaway sketch is the one place its convenience wins.

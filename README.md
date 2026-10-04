@@ -4,11 +4,11 @@
 
 > "Prioritizing animations, motion and interactions in a website shouldn't be controversial. Not adding interesting things to your web pages because of metrics will always be a downgrade."
 
-## What's inside
+## What's Inside
 
-| Skill | What it does |
-| --- | --- |
-| [`creative-development`](skills/creative-development/SKILL.md) | Opinions and conventions for creative development: [Lisergia](https://github.com/bizarro/lisergia), Preact vs React, three.js vs OGL vs OGPU vs React Three Fiber, WebGL loading, motion, CSS scaling, and a learning path for beginners. |
+| Skill                                                          | What it does                                                                                                                                                                                                                                                                                                                                                                        |
+| -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`creative-development`](skills/creative-development/SKILL.md) | Opinions and conventions for creative development: [Lisergia](https://github.com/bizarro/lisergia), Preact vs React, Three.js vs OGL vs OGPU vs React Three Fiber, WebGL loading, post-processing and frame budgets, motion, sound on phones, CSS scaling, Sanity, project setup, agent workflow and code style, older codebases, a learning path for beginners, and career advice. |
 
 ## Install
 
@@ -26,7 +26,7 @@ Or from inside a session:
 /plugin install bizarro@bizarro
 ```
 
-### Any agent (Codex, Cursor, Windsurf, Cline, Gemini CLI, Copilot, …)
+### Any Agent (Codex, Cursor, Windsurf, Cline, Gemini CLI, Copilot, …)
 
 Uses the open [skills](https://skills.sh) installer:
 
